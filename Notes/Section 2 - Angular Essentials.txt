@@ -1,0 +1,42 @@
+1. Component is divided into html, css and ts files,
+2. You can use @for, @if and @else (since Angular 17) 
+	in html file to render conditional or list of html code.
+	
+	Before version 17 you have to use 
+	*ngIf="myField; else fallback"
+	#fallback
+
+	@if -> ngFor
+3. Components can communicate with each other with @Input and @Output
+4. @Input are parameters of a component
+5. @Output can be used to emit data to parent component to listeners
+6. Use event binding to listen to emited data from @Output
+	(click)="methodEmitingAnEvent()"
+7. 2 way binding is used by [(ngModel)] = "field". It can be used in form's fields
+
+8. To output values from ts class in html use string interpolation {{ field }}
+9. You can use property binding to set parameter of a html element with component data
+	<img [src]="field" />
+10. By default Angular listens to changes in data with zone.js package
+11. Instead you can use signals (since Angular 16). 
+	In it Angular is not automaticaly watching for changes.
+	You explicitly have to notify the changes using methods like set.
+	To make a subscription to a signal Angular will know which places 
+	in the app are intrested in those data changes and should be updated
+	mySignalField().field1
+	It is more work but can be more efficient State management mechanism 
+	- can lead to better performance
+12. To dynamicaly add a css class you use
+	[class.myClass]="myField"
+13. Use ngcontent html element to create a wraping component
+14. Use pipes to format and transform outputed values
+15. To set method which will be use when a form will be submited use 
+	(ngSubmit)="onSubmitMethod()"
+16. Services - move there method and objects which are other layer of the application than components.
+	In Services you can create CRUD methods which will communicate with a server and manipulate data
+	Use dependency injection to use services in components.
+	Service can be injectable when it is decorated with @Injectable({ providedIn:'root' })
+	In a component you can inject it with a constructor
+		constructor(private myService: MyService) {}
+	or with inject function
+		private myService = inject(MyService);

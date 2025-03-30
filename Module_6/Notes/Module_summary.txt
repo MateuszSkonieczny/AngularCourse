@@ -1,0 +1,64 @@
+Component life cycle
+1. There are functions such as ngOnInit() which are run in a specific moment of component's life cycle
+2. View vs Content - View functions concern the immediate contents of the component body
+			Content functions concern content passed by ng-content
+
+Specify select in ng-content - in ng-content html element you can use select propert.
+	When passing multiple element to a component you can use this property to manage which element pass to where.
+	In the select property pass you CSS selector. In the passed element use ngProjectAs property and set there too the selector.
+	As selector names of html elements also can be used: <ng-content select="input, textarea" />
+
+ng-content fallback
+	<ng-content select="icon">  
+        	→
+    	</ng-content>
+
+Extend existing DOM elements
+	You can create component which extends the existing HTML element. 
+	E.g. you can extend button with custom selector button[appButton]. When you want to use it use you selector as property
+
+ViewChild/ren
+	Both as decorator and signal function.
+	Can be used to get chosen html element from components body.
+	In this element set selector property #myViewChildElement
+	
+ContentChild/ren
+	Both as decorator and signal function.
+	Works simmilary like ViewChild but is used to get element from the ng-content
+
+Reseting form
+	If you get access form element in .ts you can reset it with form?.nativeElement.reset();
+
+ElementRef
+	When getting html element you can wrap it with ElementRef
+
+Encapsulation
+	You can turn it off in components properties. This way e.g. component css classes will be available it the whole app
+
+Host element
+	The wrapper of a component, its selector is a host element.
+	In component properties you can set to the host component e.g. css class. This class will be seeked in component css file
+	In TS you can use ElementRef through injection to access host element programmatically
+
+Dynamic CSS class assignment
+	You can dynamicaly set CSS class e.g.
+	[class]="{
+    		status: true,
+    		'status-online': currentStatus() === 'online',
+    		'status-offline': currentStatus() === 'offline',
+    		'status-unknown': currentStatus() === 'unknown',
+  	}"
+
+@empty
+	Use it when you want to display fallback if a list in @for is empty
+
+@for variables
+	There are variables like $even, $odd, $first... which can be used inside @for loop
+
+Custom two-way binding
+	Since version 17
+	You can create 2-way binding by creating in component1 property with "model" function.
+	In component2 html when passing value to this property do it like this: [(component1Prop)]="component2Prop"
+	
+	Before 17 
+	You have to do more work. Create Input and Output...
